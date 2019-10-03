@@ -1,4 +1,4 @@
-package com.example.qrcodescanner.Model;
+package com.kominfo.netory.Model;
 
 public class Barang {
 private String id, tahun,no_kontrak, nama_barang,kategori,serial_number,status_barang,lokasi_barang;

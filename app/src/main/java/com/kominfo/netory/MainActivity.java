@@ -1,4 +1,4 @@
-package com.example.qrcodescanner;
+package com.kominfo.netory;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,8 +32,11 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnScanner, btnUpdate;
-    private EditText etId, etTahun, etKontrak, etSerial, etNama, etStatus, etLokasi;
+    private EditText etId, etTahun, etKontrak, etSerial, etNama, etLokasi;
+    private Spinner spinner;
     private ProgressBar pb;
+    private String BASE_URL = "http://95cd86c3.ngrok.io/";
+    private String statusValue = "-";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         etKontrak = findViewById(R.id.et_kontrak);
         etNama = findViewById(R.id.et_nama);
         etSerial = findViewById(R.id.et_serial);
-        etStatus = findViewById(R.id.et_status);
         etLokasi = findViewById(R.id.et_lokasi);
+        spinner = findViewById(R.id.et_status);
 
         action();
     }
@@ -69,16 +75,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (etTahun.length() == 0 || etKontrak.length() == 0 ||
                         etSerial.length() == 0 || etNama.length() == 0 ||
-                        etStatus.length() == 0 || etLokasi.length() == 0) {
+                        etLokasi.length() == 0) {
                     Toast.makeText(MainActivity.this, "Silahkan lalukan Scan Terlebih dahulu..", Toast.LENGTH_SHORT).show();
                 } else {
-                    String res = String.format("http://95cd86c3.ngrok.io/netory/api/update_barang?id=%s&tahun=%s&no_kontrak=%s&nama_barang=%s&serial_number=%s&status_barang=%s&lokasi_barang=%s",
+                    spinner.setEnabled(false);
+                    etLokasi.setEnabled(false);
+                    String res = String.format("%snetory/api/update_barang?id=%s&tahun=%s&no_kontrak=%s&nama_barang=%s&serial_number=%s&status_barang=%s&lokasi_barang=%s",
+                            BASE_URL,
                             etId.getText().toString().trim(),
                             etTahun.getText().toString().trim(),
                             etKontrak.getText().toString().trim(),
                             etNama.getText().toString().trim(),
                             etSerial.getText().toString().trim(),
-                            etStatus.getText().toString().trim(),
+                            statusValue,
                             etLokasi.getText().toString().trim());
 
                     AsyncHttpClient client = new AsyncHttpClient();
@@ -86,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                             Toast.makeText(MainActivity.this, "Berhasil Mengubah data", Toast.LENGTH_SHORT).show();
+                            cleanIt();
                         }
 
                         @Override
@@ -94,6 +104,33 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        statusValue = "Digunakan";
+                        break;
+                    case 1:
+                        statusValue = "Habis";
+                        break;
+                    case 2:
+                        statusValue = "Rusak";
+                        break;
+                    case 3:
+                        statusValue = "Hilang";
+                        break;
+                    default:
+                        statusValue = "-";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                statusValue = "-";
             }
         });
     }
@@ -118,7 +155,9 @@ public class MainActivity extends AppCompatActivity {
         String[] value= id.split(",");
         id = value[0];
         Toast.makeText(this, "Memuat data..", Toast.LENGTH_SHORT).show();
-        String url = "http://95cd86c3.ngrok.io/netory/api/get_barang_by_id?id=" + id;
+        String url = String.format("%snetory/api/get_barang_by_id?id=%s",
+                BASE_URL,
+                id);
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -153,25 +192,29 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("ResourceAsColor")
     void sukses() {
         etLokasi.setEnabled(true);
-        etStatus.setEnabled(true);
+        spinner.setEnabled(true);
         pb.setVisibility(View.GONE);
     }
 
     @SuppressLint("ResourceAsColor")
     void failed() {
         etLokasi.setEnabled(false);
-        etStatus.setEnabled(false);
+        spinner.setEnabled(false);
         pb.setVisibility(View.VISIBLE);
     }
 
     void setData(String id, String tahun, String no_kontrak, String serial, String nama_barang, String status_barang, String lokasi_barang){
         sukses();
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.status, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
         etId.setText(id);
         etTahun.setText(tahun);
         etKontrak.setText(no_kontrak);
         etSerial.setText(serial);
         etNama.setText(nama_barang);
-        etStatus.setText(status_barang);
         etLokasi.setText(lokasi_barang);
     }
 
@@ -191,7 +234,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void cleanIt() {
         etTahun.setText("");
-        etStatus.setText("");
         etLokasi.setText("");
         etKontrak.setText("");
         etNama.setText("");
