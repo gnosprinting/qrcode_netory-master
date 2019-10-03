@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_scanner"
-        android:background="@android:color/holo_blue_light"
+        android:background="@drawable/round_btn_biru"
         android:text="@string/update"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/holo_red_light"
+        android:background="@drawable/round_btn_merah"
         android:text="@string/reset"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
@@ -42,7 +42,6 @@
         android:visibility="gone" />
 
     <EditText
-        android:layout_marginTop="16dp"
         android:layout_below="@+id/progress_circular"
         android:id="@+id/et_tahun"
         android:layout_width="match_parent"
@@ -76,9 +75,9 @@
         android:id="@+id/et_nama"
         style="@style/margin16"
         android:layout_width="368dp"
-        android:hint="@string/scan_please"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_serial"
+        android:hint="@string/scan_please"
         android:enabled="false"
         android:inputType="textPersonName" />
 
@@ -88,8 +87,8 @@
         android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_nama"
         android:hint="@string/scan_please"
+        android:layout_below="@id/tv_nama"
         android:inputType="textPersonName" />
 
     <EditText

@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
                 intentIntegrator.initiateScan();
                 failed();
-                cleanIt();
             }
         });
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +72,27 @@ public class MainActivity extends AppCompatActivity {
                         etStatus.length() == 0 || etLokasi.length() == 0) {
                     Toast.makeText(MainActivity.this, "Silahkan lalukan Scan Terlebih dahulu..", Toast.LENGTH_SHORT).show();
                 } else {
-                    //::Todo Proses Update
+                    String res = String.format("http://95cd86c3.ngrok.io/netory/api/update_barang?id=%s&tahun=%s&no_kontrak=%s&nama_barang=%s&serial_number=%s&status_barang=%s&lokasi_barang=%s",
+                            etId.getText().toString().trim(),
+                            etTahun.getText().toString().trim(),
+                            etKontrak.getText().toString().trim(),
+                            etNama.getText().toString().trim(),
+                            etSerial.getText().toString().trim(),
+                            etStatus.getText().toString().trim(),
+                            etLokasi.getText().toString().trim());
+
+                    AsyncHttpClient client = new AsyncHttpClient();
+                    client.get(res, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            Toast.makeText(MainActivity.this, "Berhasil Mengubah data", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                            Toast.makeText(MainActivity.this, "gagal mengubah data", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
@@ -98,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
     void dataById(String id){
         String[] value= id.split(",");
         id = value[0];
-        String url = "http://0f28a20b.ngrok.io/netory/api/get_barang_by_id?id=" + id;
+        Toast.makeText(this, "Memuat data..", Toast.LENGTH_SHORT).show();
+        String url = "http://95cd86c3.ngrok.io/netory/api/get_barang_by_id?id=" + id;
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
