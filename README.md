@@ -1,0 +1,2 @@
+# qrcode_netory-master
+ 

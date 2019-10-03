@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">QRCodeScanner</string>
+    <string name="qr_code_value">QR Code Value</string>
+    <string name="reset">SCAN</string>
+    <string name="name">Name</string>
+    <string name="nama_barang">Nama Barang</string>
+    <string name="serial_number">Serial Number</string>
+    <string name="tahun">Tahun</string>
+    <string name="nomor_kontrak">Nomor Kontrak</string>
+    <string name="status_barang">Status Barang</string>
+    <string name="lokasi_barang_terkini">Lokasi Barang Terkini</string>
+    <string name="status_digunakan">Status (Digunakan/Habis/Rusak/Hilang)</string>
+    <string name="update">UPDATE</string>
+</resources>
