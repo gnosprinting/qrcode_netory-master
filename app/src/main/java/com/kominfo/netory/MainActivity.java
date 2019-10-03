@@ -58,11 +58,13 @@ public class MainActivity extends AppCompatActivity {
         etLokasi = findViewById(R.id.et_lokasi);
         spinner = findViewById(R.id.et_status);
 
+        btnUpdate.setVisibility(View.INVISIBLE);
+
         action();
     }
 
     private void action() {
-        btnScanner.setOnClickListener(new View.OnClickListener(){
+        btnScanner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
@@ -139,20 +141,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null){
-            if (result.getContents()==null){
+        if (result != null) {
+            if (result.getContents() == null) {
                 Toast.makeText(this, "hasil tidak diketahui", Toast.LENGTH_SHORT).show();
                 failed();
-            }else{
+            } else {
                 dataById(result.getContents());
             }
-        }else{
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    void dataById(String id){
-        String[] value= id.split(",");
+    void dataById(String id) {
+        String[] value = id.split(",");
         id = value[0];
         Toast.makeText(this, "Memuat data..", Toast.LENGTH_SHORT).show();
         String url = String.format("%snetory/api/get_barang_by_id?id=%s",
@@ -193,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
     void sukses() {
         etLokasi.setEnabled(true);
         spinner.setEnabled(true);
+        btnUpdate.setVisibility(View.VISIBLE);
         pb.setVisibility(View.GONE);
     }
 
@@ -200,10 +203,11 @@ public class MainActivity extends AppCompatActivity {
     void failed() {
         etLokasi.setEnabled(false);
         spinner.setEnabled(false);
+        btnUpdate.setVisibility(View.INVISIBLE);
         pb.setVisibility(View.VISIBLE);
     }
 
-    void setData(String id, String tahun, String no_kontrak, String serial, String nama_barang, String status_barang, String lokasi_barang){
+    void setData(String id, String tahun, String no_kontrak, String serial, String nama_barang, String status_barang, String lokasi_barang) {
         sukses();
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.status, android.R.layout.simple_spinner_item);
