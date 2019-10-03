@@ -81,15 +81,12 @@
         android:enabled="false"
         android:inputType="textPersonName" />
 
-    <EditText
+    <Spinner
         android:id="@+id/et_status"
-        style="@style/margin16"
-        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/scan_please"
-        android:layout_below="@id/tv_nama"
-        android:inputType="textPersonName" />
+        style="@style/margin16"
+        android:layout_below="@id/tv_nama" />
 
     <EditText
         android:id="@+id/et_lokasi"

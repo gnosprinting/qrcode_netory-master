@@ -12,4 +12,11 @@
     <string name="status_digunakan">Status (Digunakan/Habis/Rusak/Hilang)</string>
     <string name="update">UPDATE</string>
     <string name="scan_please">Silahkan Scan data dulu..</string>
+
+    <string-array name="status">
+        <item>Digunakan</item>
+        <item>Habis</item>
+        <item>Rusak</item>
+        <item>Hilang</item>
+    </string-array>
 </resources>
