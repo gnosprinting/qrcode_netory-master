@@ -11,4 +11,5 @@
     <string name="lokasi_barang_terkini">Lokasi Barang Terkini</string>
     <string name="status_digunakan">Status (Digunakan/Habis/Rusak/Hilang)</string>
     <string name="update">UPDATE</string>
+    <string name="scan_please">Silahkan Scan data dulu..</string>
 </resources>

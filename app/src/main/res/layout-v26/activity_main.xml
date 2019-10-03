@@ -1,184 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<!--    <TextView-->
-<!--        android:id="@+id/tv_qrcode_value"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:text="@string/qr_code_value"-->
-<!--        android:textSize="18sp"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        tools:layout_editor_absoluteX="0dp"-->
-<!--        tools:layout_editor_absoluteY="335dp" />-->
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/progress_circular" />
+
+    <Button
+        android:id="@+id/button_update"
+        style="@style/margin16Bawah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_scanner"
+        android:background="@android:color/holo_blue_light"
+        android:text="@string/update"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button_scanner"
-        android:layout_width="368dp"
-        android:layout_height="44dp"
+        style="@style/margin16Bawah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_red_light"
         android:text="@string/reset"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_qrcode_value" />
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
+        android:hint="Tahun"
         android:inputType="textPersonName"
-        android:visibility = "gone"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_scanner" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/tv_id"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/tahun"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/et_id" />-->
+        android:visibility="gone" />
 
     <EditText
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/progress_circular"
         android:id="@+id/et_tahun"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="@string/scan_please"
+        style="@style/margin16"
         android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="textPersonName"
         android:enabled="false"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_scanner" />
-
-    <TextView
-        android:id="@+id/tv_tahun"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tahun"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_tahun" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/et_kontrak"
-        android:layout_width="wrap_content"
+        style="@style/margin16"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_below="@+id/tv_tahun"
         android:enabled="false"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tahun" />
-
-    <TextView
-        android:id="@+id/tv_kontrak"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nomor_kontrak"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_kontrak" />
+        android:hint="@string/scan_please"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/et_serial"
-        android:layout_width="wrap_content"
+        style="@style/margin16"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_below="@id/tv_kontrak"
         android:enabled="false"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_kontrak" />
-
-    <TextView
-        android:id="@+id/tv_serial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/serial_number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_serial" />
+        android:hint="@string/scan_please"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/et_nama"
+        style="@style/margin16"
         android:layout_width="368dp"
+        android:hint="@string/scan_please"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_below="@id/tv_serial"
         android:enabled="false"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_serial" />
-
-    <TextView
-        android:id="@+id/tv_nama"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nama_barang"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_nama" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/et_status"
-        android:layout_width="wrap_content"
+        style="@style/margin16"
+        android:enabled="false"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nama" />
-
-    <TextView
-        android:id="@+id/tv_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/status_digunakan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_status" />
+        android:layout_below="@id/tv_nama"
+        android:hint="@string/scan_please"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/et_lokasi"
-        android:layout_width="wrap_content"
+        style="@style/margin16"
+        android:enabled="false"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_status" />
+        android:layout_below="@+id/tv_status"
+        android:hint="@string/scan_please"
+        android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/tv_lokasi"
+        android:id="@+id/tv_tahun"
+        style="@style/margin16"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lokasi_barang_terkini"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_lokasi" />
+        android:layout_below="@+id/et_tahun"
+        android:text="@string/tahun" />
 
-    <Button
-        android:id="@+id/button_update"
-        android:layout_width="368dp"
-        android:layout_height="44dp"
-        android:text="@string/update"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_lokasi" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_kontrak"
+        style="@style/margin16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/et_kontrak"
+        android:text="@string/nomor_kontrak" />
+
+    <TextView
+        android:id="@+id/tv_serial"
+        style="@style/margin16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/et_serial"
+        android:text="@string/serial_number" />
+
+    <TextView
+        android:id="@+id/tv_nama"
+        style="@style/margin16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/et_nama"
+        android:text="@string/nama_barang" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        style="@style/margin16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_status"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="@string/status_digunakan" />
+
+    <TextView
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:id="@+id/tv_lokasi"
+        style="@style/margin16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_lokasi"
+        android:text="@string/lokasi_barang_terkini" />
+</RelativeLayout>
